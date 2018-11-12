@@ -4,6 +4,8 @@
 
 class ofApp : public ofBaseApp{
 
+	ofVideoGrabber camera;
+
 	public:
 		void setup();
 		void update();
