@@ -1,10 +1,9 @@
 #pragma once
 
-#include "ofMain.h"
+// #include "ofMain.h"
+#include "pen-viewer.h"
 
-class ofApp : public ofBaseApp{
-
-	ofVideoGrabber camera;
+class ofFingerPaint : public ofBaseApp {
 
 	public:
 		void setup();
@@ -22,5 +21,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+		PenViewer pen_viewer_;
 		
 };

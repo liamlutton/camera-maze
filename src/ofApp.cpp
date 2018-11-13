@@ -1,74 +1,71 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-    camera.setup(320, 240);
+void ofFingerPaint::setup(){
+    pen_viewer_.setup();
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-    camera.update();
-    if (camera.isFrameNew()) {
-        // Process image for display
-    }
+void ofFingerPaint::update(){
+    pen_viewer_.update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-    camera.draw(0, 0);
+void ofFingerPaint::draw(){
+    pen_viewer_.getCamera().draw(0, 0);
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
+void ofFingerPaint::keyPressed(int key){
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofFingerPaint::keyReleased(int key){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofFingerPaint::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofFingerPaint::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
+void ofFingerPaint::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofFingerPaint::mouseReleased(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
+void ofFingerPaint::mouseEntered(int x, int y){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
+void ofFingerPaint::mouseExited(int x, int y){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
+void ofFingerPaint::windowResized(int w, int h){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofFingerPaint::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void ofFingerPaint::dragEvent(ofDragInfo dragInfo){ 
 
 }

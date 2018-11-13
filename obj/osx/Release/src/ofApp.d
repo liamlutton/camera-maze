@@ -1,6 +1,7 @@
 obj/osx/Release/src/ofApp.o: \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/ofApp.cpp \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/ofApp.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/pen-viewer.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/ofMain.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/utils/ofConstants.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/glew/include/GL/glew.h \
@@ -824,6 +825,8 @@ obj/osx/Release/src/ofApp.o: \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofEasyCam.h
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/ofApp.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/pen-viewer.h:
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/ofMain.h:
 
