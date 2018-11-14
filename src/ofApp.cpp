@@ -13,7 +13,9 @@ void ofFingerPaint::update(){
 //--------------------------------------------------------------
 void ofFingerPaint::draw(){
     if (pen_viewer_.isImageLoaded()) {
-        pen_viewer_.getCurrentImage().draw(0, 0);
+        ofImage image = pen_viewer_.getCurrentImage();
+
+        image.draw(image_x_ + image.getWidth(), image_y_, -1 * image.getWidth(), image.getHeight());
     }
 }
 
