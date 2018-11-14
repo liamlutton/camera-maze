@@ -12,12 +12,14 @@ void ofFingerPaint::update(){
 
 //--------------------------------------------------------------
 void ofFingerPaint::draw(){
-    pen_viewer_.getCamera().draw(0, 0);
+    if (pen_viewer_.isImageLoaded()) {
+        pen_viewer_.getCurrentImage().draw(0, 0);
+    }
 }
 
 //--------------------------------------------------------------
 void ofFingerPaint::keyPressed(int key){
-    
+
 }
 
 //--------------------------------------------------------------
