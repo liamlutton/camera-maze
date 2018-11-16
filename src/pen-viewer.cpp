@@ -32,6 +32,10 @@ void PenViewer::processImage() {
     if (!prev_image_.bAllocated || !current_image_.bAllocated) {
         return;
     }
+
+    // Set display to change between iamges
+    display_image_ = current_image_;
+    display_image_ -= prev_image_;
 }
 
 ofVideoGrabber PenViewer::getCamera() const {
