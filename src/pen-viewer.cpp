@@ -2,6 +2,7 @@
 
 void PenViewer::setup() {
     setupCamera();
+    current_image_.allocate(kCameraWidth, kCameraHeight);
 }
 
 void PenViewer::setupCamera() {
@@ -12,12 +13,24 @@ void PenViewer::update() {
     camera_.update();
 
     if (camera_.isFrameNew()) {
-        image_loaded_ = true;
+        // If current is already set, setup previous
+        if (current_image_.bAllocated) {
+            prev_image_ = current_image_;
+        }
 
-        // Process image for display
+        // Sets current image
         ofPixels pixels;
         camera_.getTexture().readToPixels(pixels);
         current_image_.setFromPixels(pixels);
+
+        processImage();
+    }
+}
+
+void PenViewer::processImage() {
+    // Both current and previous image must be allocated
+    if (!prev_image_.bAllocated || !current_image_.bAllocated) {
+        return;
     }
 }
 
@@ -25,10 +38,10 @@ ofVideoGrabber PenViewer::getCamera() const {
     return camera_;
 }
 
-ofImage PenViewer::getCurrentImage() const {
-    return current_image_;
+ofxCvColorImage PenViewer::getDisplayImage() const {
+    return display_image_;
 }
 
-bool PenViewer::isImageLoaded() {
-    return image_loaded_;
+ofxCvColorImage PenViewer::getCurrentImage() const {
+    return current_image_;
 }

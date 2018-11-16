@@ -12,10 +12,9 @@ void ofFingerPaint::update(){
 
 //--------------------------------------------------------------
 void ofFingerPaint::draw(){
-    if (pen_viewer_.isImageLoaded()) {
-        ofImage image = pen_viewer_.getCurrentImage();
-
-        image.draw(image_x_ + image.getWidth(), image_y_, -1 * image.getWidth(), image.getHeight());
+    ofxCvColorImage image = pen_viewer_.getCurrentImage();
+    if (image.bAllocated) {
+        image.draw(image_x_ + image.getWidth(), image_y_, -1 * PenViewer::kCameraWidth, PenViewer::kCameraHeight);
     }
 }
 

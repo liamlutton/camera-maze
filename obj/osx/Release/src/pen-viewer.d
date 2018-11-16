@@ -821,7 +821,46 @@ obj/osx/Release/src/pen-viewer.o: \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/of3dUtils.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofCamera.h \
-  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofEasyCam.h
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofEasyCam.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxOpenCv.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvConstants.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvdef.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/hal/interface.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/version.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/base.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvstd.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/ptr.inl.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/neon_utils.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/traits.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/matx.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/saturate.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/fast_math.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/types.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/bufferpool.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.inl.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/persistence.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/operations.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvstd.inl.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/utility.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/optim.hpp \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/types_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/photo/photo_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/video/tracking_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/objdetect/objdetect_c.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvImage.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvBlob.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvColorImage.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvFloatImage.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/pen-viewer.h:
 
@@ -2466,3 +2505,81 @@ obj/osx/Release/src/pen-viewer.o: \
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofCamera.h:
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/libs/openFrameworks/3d/ofEasyCam.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxOpenCv.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvConstants.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv/cv.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvdef.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/hal/interface.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/version.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/base.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvstd.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/ptr.inl.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/neon_utils.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/traits.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/matx.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/saturate.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/fast_math.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/types.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/bufferpool.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/mat.inl.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/persistence.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/operations.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/cvstd.inl.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/utility.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/core/optim.hpp:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/imgproc_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/imgproc/types_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/photo/photo_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/video/tracking_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv2/objdetect/objdetect_c.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvImage.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvBlob.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvColorImage.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvFloatImage.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h:
