@@ -15,6 +15,12 @@ class PenViewer {
 
         ofxCvColorImage display_image_;
 
+        ofxCvColorImage red_image_;
+        ofxCvColorImage green_image_;
+        ofxCvColorImage blue_image_;
+
+        ofxCvGrayscaleImage gray_product_;
+
     public:
         ofVideoGrabber getCamera() const;
         ofxCvColorImage getCurrentImage() const;
@@ -26,4 +32,5 @@ class PenViewer {
 
         static const int kCameraWidth = 640;
         static const int kCameraHeight = 480;
+
 };

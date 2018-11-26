@@ -3,6 +3,14 @@
 void PenViewer::setup() {
     setupCamera();
     current_image_.allocate(kCameraWidth, kCameraHeight);
+
+    red_image_.allocate(kCameraWidth, kCameraHeight);
+    green_image_.allocate(kCameraWidth, kCameraHeight);
+    blue_image_.allocate(kCameraWidth, kCameraHeight);
+
+    red_image_.set(255, 0, 0);
+    green_image_.set(0, 255, 0);
+    blue_image_.set(0, 0, 255);
 }
 
 void PenViewer::setupCamera() {
@@ -21,6 +29,18 @@ void PenViewer::update() {
         // Sets current image
         ofPixels pixels;
         camera_.getTexture().readToPixels(pixels);
+
+        // Only accepts red pixels for testing
+        for (int x = 0; x < kCameraWidth; x++) {
+            for (int y = 0; y < kCameraHeight; y++) {
+                ofColor color = pixels.getColor(x, y);
+                if (color.r > color.b + color.g) {
+                    color.set(255, 0, 0, 0);
+                    pixels.setColor(x, y, color);
+                }
+            }
+        }
+
         current_image_.setFromPixels(pixels);
 
         processImage();
@@ -33,9 +53,19 @@ void PenViewer::processImage() {
         return;
     }
 
+    // current_image_ -= blue_image_;
+    // current_image_ -= green_image_;
+
+    // display_image_ = current_image_;
+
+    // prev_image_ -= blue_image_;
+    // prev_image_ -= green_image_;
+
     // Set display to change between iamges
     display_image_ = current_image_;
-    display_image_ -= prev_image_;
+    // display_image_ -= prev_image_;
+
+    // gray_product_ = display_image_;
 }
 
 ofVideoGrabber PenViewer::getCamera() const {
@@ -44,6 +74,7 @@ ofVideoGrabber PenViewer::getCamera() const {
 
 ofxCvColorImage PenViewer::getDisplayImage() const {
     return display_image_;
+    // return d;
 }
 
 ofxCvColorImage PenViewer::getCurrentImage() const {
