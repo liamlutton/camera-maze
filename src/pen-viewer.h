@@ -8,6 +8,7 @@ class PenViewer {
     private:
         void processImage();
         void setupCamera();
+        void loadColorPixelImages(const ofPixels &image_pixels);
 
         ofVideoGrabber camera_;
         ofxCvColorImage current_image_;
@@ -15,11 +16,9 @@ class PenViewer {
 
         ofxCvColorImage display_image_;
 
-        ofxCvColorImage red_image_;
-        ofxCvColorImage green_image_;
-        ofxCvColorImage blue_image_;
-
-        ofxCvGrayscaleImage gray_product_;
+        ofxCvColorImage red_blob_image_;
+        ofxCvColorImage green_blob_image_;
+        ofxCvColorImage blue_blob_image_;
 
     public:
         ofVideoGrabber getCamera() const;

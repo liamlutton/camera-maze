@@ -3,45 +3,71 @@
 void PenViewer::setup() {
     setupCamera();
     current_image_.allocate(kCameraWidth, kCameraHeight);
-
-    red_image_.allocate(kCameraWidth, kCameraHeight);
-    green_image_.allocate(kCameraWidth, kCameraHeight);
-    blue_image_.allocate(kCameraWidth, kCameraHeight);
-
-    red_image_.set(255, 0, 0);
-    green_image_.set(0, 255, 0);
-    blue_image_.set(0, 0, 255);
 }
 
 void PenViewer::setupCamera() {
     camera_.setup(kCameraWidth, kCameraHeight);
 }
 
-void PenViewer::update() {
-    camera_.update();
+void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
+        int added_value = 50;
 
-    if (camera_.isFrameNew()) {
-        // If current is already set, setup previous
-        if (current_image_.bAllocated) {
-            prev_image_ = current_image_;
-        }
+        ofPixels red_blob_pixels = image_pixels;
+        ofPixels green_blob_pixels = image_pixels;
+        ofPixels blue_blob_pixels = image_pixels;
 
-        // Sets current image
-        ofPixels pixels;
-        camera_.getTexture().readToPixels(pixels);
+        ofColor black;
+        black.set(0, 0, 0);
 
-        // Only accepts red pixels for testing
+        red_blob_pixels.setColor(black);
+        green_blob_pixels.setColor(black);
+        blue_blob_pixels.setColor(black);
+
         for (int x = 0; x < kCameraWidth; x++) {
             for (int y = 0; y < kCameraHeight; y++) {
-                ofColor color = pixels.getColor(x, y);
-                if (color.r > color.b + color.g) {
-                    color.set(255, 0, 0, 0);
-                    pixels.setColor(x, y, color);
+                ofColor color = image_pixels.getColor(x, y);
+
+                // Possibly clean this code up
+                if (color.r > color.b + color.g + added_value) {
+                    color.set(255, 255, 255, 0);
+                    red_blob_pixels.setColor(x, y, color);
+                } else if (color.b > color.r + color.g + added_value) {
+                    color.set(255, 255, 255, 0);
+                    blue_blob_pixels.setColor(x, y, color);
+                } else if (color.g > color.b + color.r) {
+                    color.set(255, 255, 255, 0);
+                    green_blob_pixels.setColor(x, y, color);
                 }
             }
         }
 
-        current_image_.setFromPixels(pixels);
+        red_blob_image_.setFromPixels(red_blob_pixels);
+        green_blob_image_.setFromPixels(green_blob_pixels);
+        blue_blob_image_.setFromPixels(blue_blob_pixels);
+}
+
+void PenViewer::update() {
+    camera_.update();
+
+    if (camera_.isFrameNew()) {
+        // Sets current image
+        ofPixels image_pixels;
+        camera_.getTexture().readToPixels(image_pixels);
+
+        if (image_pixels.size() == 0) {
+            return;
+        }
+
+        // Blur pixels to remove noise
+        ofxCvColorImage current_frame_image;
+        current_frame_image.setFromPixels(image_pixels);
+        current_frame_image.blurGaussian(7);
+
+        image_pixels = current_frame_image.getPixels();
+
+        // loadColorPixelImages(image_pixels);
+        // current_image_ = red_blob_image_;
+        current_image_ = current_frame_image;
 
         processImage();
     }
@@ -49,23 +75,16 @@ void PenViewer::update() {
 
 void PenViewer::processImage() {
     // Both current and previous image must be allocated
-    if (!prev_image_.bAllocated || !current_image_.bAllocated) {
+    if (!current_image_.bAllocated) {
         return;
     }
 
-    // current_image_ -= blue_image_;
-    // current_image_ -= green_image_;
+    ofxCvGrayscaleImage red_binary;
+    red_binary.allocate(red_blob_image_.width, red_blob_image_.height);
+    red_binary.setFromColorImage(red_blob_image_);
+    red_binary.threshold(40);
 
-    // display_image_ = current_image_;
-
-    // prev_image_ -= blue_image_;
-    // prev_image_ -= green_image_;
-
-    // Set display to change between iamges
     display_image_ = current_image_;
-    // display_image_ -= prev_image_;
-
-    // gray_product_ = display_image_;
 }
 
 ofVideoGrabber PenViewer::getCamera() const {
@@ -73,8 +92,8 @@ ofVideoGrabber PenViewer::getCamera() const {
 }
 
 ofxCvColorImage PenViewer::getDisplayImage() const {
+    // return red_blob_image_;
     return display_image_;
-    // return d;
 }
 
 ofxCvColorImage PenViewer::getCurrentImage() const {
