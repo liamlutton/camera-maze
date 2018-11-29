@@ -10,40 +10,48 @@ void PenViewer::setupCamera() {
 }
 
 void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
-        int added_value = 50;
 
-        ofPixels red_blob_pixels = image_pixels;
-        ofPixels green_blob_pixels = image_pixels;
-        ofPixels blue_blob_pixels = image_pixels;
+    // Move this
+    if (!red_blob_image_.bAllocated || !green_blob_image_.bAllocated || !blue_blob_image_.bAllocated) {
+        red_blob_image_.allocate(kCameraWidth, kCameraHeight);
+        green_blob_image_.allocate(kCameraWidth, kCameraHeight);
+        blue_blob_image_.allocate(kCameraWidth, kCameraHeight);
+    }
 
-        ofColor black;
-        black.set(0, 0, 0);
+    int added_value = 50;
 
-        red_blob_pixels.setColor(black);
-        green_blob_pixels.setColor(black);
-        blue_blob_pixels.setColor(black);
+    ofPixels red_blob_pixels = image_pixels;
+    ofPixels green_blob_pixels = image_pixels;
+    ofPixels blue_blob_pixels = image_pixels;
 
-        for (int x = 0; x < kCameraWidth; x++) {
-            for (int y = 0; y < kCameraHeight; y++) {
-                ofColor color = image_pixels.getColor(x, y);
+    ofColor black;
+    black.set(0, 0, 0);
 
-                // Possibly clean this code up
-                if (color.r > color.b + color.g + added_value) {
-                    color.set(255, 255, 255, 0);
-                    red_blob_pixels.setColor(x, y, color);
-                } else if (color.b > color.r + color.g + added_value) {
-                    color.set(255, 255, 255, 0);
-                    blue_blob_pixels.setColor(x, y, color);
-                } else if (color.g > color.b + color.r) {
-                    color.set(255, 255, 255, 0);
-                    green_blob_pixels.setColor(x, y, color);
-                }
+    red_blob_pixels.setColor(black);
+    green_blob_pixels.setColor(black);
+    blue_blob_pixels.setColor(black);
+
+    for (int x = 0; x < kCameraWidth; x++) {
+        for (int y = 0; y < kCameraHeight; y++) {
+            ofColor color = image_pixels.getColor(x, y);
+
+            // Possibly clean this code up
+            if (color.r > color.b + color.g + added_value) {
+                color.set(255, 255, 255, 0);
+                red_blob_pixels.setColor(x, y, color);
+            } else if (color.b > color.r + color.g + added_value) {
+                color.set(255, 255, 255, 0);
+                blue_blob_pixels.setColor(x, y, color);
+            } else if (color.g > color.b + color.r) {
+                color.set(255, 255, 255, 0);
+                green_blob_pixels.setColor(x, y, color);
             }
         }
+    }
 
-        red_blob_image_.setFromPixels(red_blob_pixels);
-        green_blob_image_.setFromPixels(green_blob_pixels);
-        blue_blob_image_.setFromPixels(blue_blob_pixels);
+    red_blob_image_.setFromPixels(red_blob_pixels);
+    green_blob_image_.setFromPixels(green_blob_pixels);
+    blue_blob_image_.setFromPixels(blue_blob_pixels);
 }
 
 void PenViewer::update() {
@@ -60,14 +68,17 @@ void PenViewer::update() {
 
         // Blur pixels to remove noise
         ofxCvColorImage current_frame_image;
+        current_frame_image.allocate(kCameraWidth, kCameraHeight);
         current_frame_image.setFromPixels(image_pixels);
         current_frame_image.blurGaussian(7);
 
         image_pixels = current_frame_image.getPixels();
 
-        // loadColorPixelImages(image_pixels);
-        // current_image_ = red_blob_image_;
-        current_image_ = current_frame_image;
+        loadColorPixelImages(image_pixels);
+
+        // All for testing
+        current_image_ = red_blob_image_;
+        // current_image_ = current_frame_image;
 
         processImage();
     }
@@ -76,6 +87,11 @@ void PenViewer::update() {
 void PenViewer::processImage() {
     // Both current and previous image must be allocated
     if (!current_image_.bAllocated) {
+        return;
+    }
+    
+    // Ensure that the colored blob images are allocated
+    if (!red_blob_image_.bAllocated || !green_blob_image_.bAllocated || !blue_blob_image_.bAllocated) {
         return;
     }
 
