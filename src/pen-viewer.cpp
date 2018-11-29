@@ -100,6 +100,13 @@ void PenViewer::processImage() {
     red_binary.setFromColorImage(red_blob_image_);
     red_binary.threshold(40);
 
+    contour_finder_.findContours(red_binary, 40, 2000, 1, false);
+
+    if (contour_finder_.blobs.size() == 1) {
+        ofPoint center = contour_finder_.blobs[0].centroid;
+        std::cout << center.x << " " << center.y << std::endl;
+    }
+
     display_image_ = current_image_;
 }
 

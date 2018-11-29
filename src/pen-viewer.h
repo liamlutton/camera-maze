@@ -12,7 +12,8 @@ class PenViewer {
 
         ofVideoGrabber camera_;
         ofxCvColorImage current_image_;
-        ofxCvColorImage prev_image_;
+        
+        ofxCvContourFinder contour_finder_;
 
         ofxCvColorImage display_image_;
 
