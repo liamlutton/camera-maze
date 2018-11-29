@@ -18,7 +18,7 @@ void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
         blue_blob_image_.allocate(kCameraWidth, kCameraHeight);
     }
 
-    int added_value = 50;
+    int added_value = 30;
 
     ofPixels red_blob_pixels = image_pixels;
     ofPixels green_blob_pixels = image_pixels;
