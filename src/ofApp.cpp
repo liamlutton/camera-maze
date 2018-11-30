@@ -14,7 +14,7 @@ void ofFingerPaint::update(){
 void ofFingerPaint::draw(){
     ofxCvColorImage image = pen_viewer_.getDisplayImage();
     if (image.bAllocated) {
-        image.draw(image_x_ + image.getWidth(), image_y_, -1 * PenViewer::kCameraWidth, PenViewer::kCameraHeight);
+        image.draw(image_x_ + image.getWidth(), image_y_, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
     }
 }
 

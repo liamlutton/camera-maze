@@ -2,20 +2,22 @@
 
 void PenViewer::setup() {
     setupCamera();
-    current_image_.allocate(kCameraWidth, kCameraHeight);
+    current_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
+    current_color_.set(200, 100, 0, 1);
+    canvas_.setup();
 }
 
 void PenViewer::setupCamera() {
-    camera_.setup(kCameraWidth, kCameraHeight);
+    camera_.setup(Canvas::kCameraWidth, Canvas::kCameraHeight);
 }
 
 void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
 
     // Move this
     if (!red_blob_image_.bAllocated || !green_blob_image_.bAllocated || !blue_blob_image_.bAllocated) {
-        red_blob_image_.allocate(kCameraWidth, kCameraHeight);
-        green_blob_image_.allocate(kCameraWidth, kCameraHeight);
-        blue_blob_image_.allocate(kCameraWidth, kCameraHeight);
+        red_blob_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
+        green_blob_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
+        blue_blob_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
     }
 
     int added_value = 30;
@@ -31,8 +33,8 @@ void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
     green_blob_pixels.setColor(black);
     blue_blob_pixels.setColor(black);
 
-    for (int x = 0; x < kCameraWidth; x++) {
-        for (int y = 0; y < kCameraHeight; y++) {
+    for (int x = 0; x < Canvas::kCameraWidth; x++) {
+        for (int y = 0; y < Canvas::kCameraHeight; y++) {
             ofColor color = image_pixels.getColor(x, y);
 
             // Possibly clean this code up
@@ -68,7 +70,7 @@ void PenViewer::update() {
 
         // Blur pixels to remove noise
         ofxCvColorImage current_frame_image;
-        current_frame_image.allocate(kCameraWidth, kCameraHeight);
+        current_frame_image.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
         current_frame_image.setFromPixels(image_pixels);
         current_frame_image.blurGaussian(7);
 
@@ -103,11 +105,18 @@ void PenViewer::processImage() {
     contour_finder_.findContours(red_binary, 40, 2000, 1, false);
 
     if (contour_finder_.blobs.size() == 1) {
-        ofPoint center = contour_finder_.blobs[0].centroid;
-        std::cout << center.x << " " << center.y << std::endl;
+        center_red_ = contour_finder_.blobs[0].centroid;
+        canvas_.draw(center_red_, current_color_);
     }
 
+    current_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
+    canvas_.display(current_image_);
+
     display_image_ = current_image_;
+}
+
+Canvas PenViewer::getCanvas() const {
+    return canvas_;
 }
 
 ofVideoGrabber PenViewer::getCamera() const {
