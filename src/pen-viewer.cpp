@@ -2,7 +2,7 @@
 
 void PenViewer::setup() {
     setupCamera();
-    current_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
+    display_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
     current_color_.set(200, 100, 0, 1);
     canvas_.setup();
 }
@@ -77,21 +77,11 @@ void PenViewer::update() {
         image_pixels = current_frame_image.getPixels();
 
         loadColorPixelImages(image_pixels);
-
-        // All for testing
-        current_image_ = red_blob_image_;
-        // current_image_ = current_frame_image;
-
         processImage();
     }
 }
 
 void PenViewer::processImage() {
-    // Both current and previous image must be allocated
-    if (!current_image_.bAllocated) {
-        return;
-    }
-    
     // Ensure that the colored blob images are allocated
     if (!red_blob_image_.bAllocated || !green_blob_image_.bAllocated || !blue_blob_image_.bAllocated) {
         return;
@@ -109,10 +99,7 @@ void PenViewer::processImage() {
         canvas_.draw(center_red_, current_color_);
     }
 
-    current_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
-    canvas_.display(current_image_);
-
-    display_image_ = current_image_;
+    canvas_.display(display_image_);
 }
 
 Canvas PenViewer::getCanvas() const {
@@ -124,10 +111,5 @@ ofVideoGrabber PenViewer::getCamera() const {
 }
 
 ofxCvColorImage PenViewer::getDisplayImage() const {
-    // return red_blob_image_;
     return display_image_;
-}
-
-ofxCvColorImage PenViewer::getCurrentImage() const {
-    return current_image_;
 }

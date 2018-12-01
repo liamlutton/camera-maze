@@ -12,10 +12,7 @@ class PenViewer {
         void loadColorPixelImages(const ofPixels &image_pixels);
 
         Canvas canvas_;
-
-        ofVideoGrabber camera_;
-        ofxCvColorImage current_image_;
-        
+        ofVideoGrabber camera_;        
         ofxCvContourFinder contour_finder_;
 
         ofxCvColorImage display_image_;
@@ -32,7 +29,6 @@ class PenViewer {
 
     public:
         ofVideoGrabber getCamera() const;
-        ofxCvColorImage getCurrentImage() const;
         ofxCvColorImage getDisplayImage() const;
         Canvas getCanvas() const;
         bool isImageLoaded();
