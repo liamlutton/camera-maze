@@ -3,8 +3,9 @@
 void PenViewer::setup() {
     setupCamera();
     display_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
-    current_color_.set(200, 100, 0, 1);
+    current_color_.set(0, 0, 0, 1);
     canvas_.setup();
+    canvas_.setBrushSize(30);
 }
 
 void PenViewer::setupCamera() {
