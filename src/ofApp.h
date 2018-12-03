@@ -1,6 +1,5 @@
 #pragma once
 
-// #include "ofMain.h"
 #include "pen-viewer.h"
 #include "canvas.h"
 

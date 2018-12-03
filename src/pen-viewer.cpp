@@ -12,7 +12,6 @@ void PenViewer::setupCamera() {
 }
 
 void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
-
     // Move this
     if (!red_blob_image_.bAllocated || !green_blob_image_.bAllocated || !blue_blob_image_.bAllocated) {
         red_blob_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
