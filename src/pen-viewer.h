@@ -16,14 +16,8 @@ class PenViewer {
         ofxCvContourFinder contour_finder_;
 
         ofxCvColorImage display_image_;
-
         ofxCvColorImage red_blob_image_;
-        ofxCvColorImage green_blob_image_;
-        ofxCvColorImage blue_blob_image_;
-
         ofPoint center_red_;
-        ofPoint center_green_;
-        ofPoint center_blue_;
 
         ofColor current_color_;
 

@@ -861,7 +861,8 @@ obj/osx/Release/src/pen-viewer.o: \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h \
   /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h \
-  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/canvas.h
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/canvas.h \
+  /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/maze.h
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/pen-viewer.h:
 
@@ -2586,3 +2587,5 @@ obj/osx/Release/src/pen-viewer.o: \
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h:
 
 /Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/canvas.h:
+
+/Users/lutton/Desktop/cs-126/open-frameworks/of_v0.10.0_osx_release/apps/myApps/finger-painting/src/maze.h:
