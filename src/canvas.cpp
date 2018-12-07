@@ -48,29 +48,22 @@ void Canvas::draw(const ofPoint &point, const ofColor &color) {
 
     maze_.move(point.y / maze_block_width, point.x / maze_block_width);
 
-    // Make these constants
-    ofColor start_color(200, 0, 100);
-    ofColor tile_color(120, 0, 25, 0.5);
-    ofColor wall_color(100, 100, 100, 1);
-    ofColor empty_color(255, 255, 255, 1);
-    ofColor player_color(0, 100, 255, 1);
-
     if (!maze_.isUserAlive()) {
-        image_pixels_.setColor(empty_color);
+        image_pixels_.setColor(kEmptySpaceColor);
 
         // Drawing start box
         for (int start_x = 0; start_x < maze_block_width; start_x++) {
             for (int start_y = 0; start_y < maze_block_height; start_y++) {
                 int x_pixel_pos = start_x + maze_.getStartColumn() * maze_block_width;
                 int y_pixel_pos = start_y + maze_.getStartRow() * maze_block_height;
-                image_pixels_.setColor(x_pixel_pos, y_pixel_pos, start_color);
+                image_pixels_.setColor(x_pixel_pos, y_pixel_pos, kStartBlockColor);
             }
         }
 
         // Drawing player
         for (int rel_x = -3; rel_x <= 3; rel_x++) {
             for (int rel_y = -3; rel_y <= 3; rel_y++) {
-                image_pixels_.setColor(point.x + rel_x, point.y + rel_y, player_color);
+                image_pixels_.setColor(point.x + rel_x, point.y + rel_y, kPlayerColor);
             }
         }
         return;
@@ -93,24 +86,24 @@ void Canvas::draw(const ofPoint &point, const ofColor &color) {
 
         // Drawing maze walls
         if (maze_.getItemAt(maze_row, maze_column) == MazePiece::kMazeWall) {
-            image_pixels_.setColor(pos_x, pos_y, wall_color);
+            image_pixels_.setColor(pos_x, pos_y, kWallColor);
             continue;
         }
 
         // Drawing player
         if (fabs(pos_x - point.x) <= 3 && fabs(pos_y - point.y) <= 3) {
-            image_pixels_.setColor(pos_x, pos_y, player_color);
+            image_pixels_.setColor(pos_x, pos_y, kPlayerColor);
             continue;
         }
 
         // Drawing maze tiles
         if (pos_x % kTileSpacingPx == 0 || pos_y % kTileSpacingPx == 0) {
-            image_pixels_.setColor(pos_x, pos_y, tile_color);
+            image_pixels_.setColor(pos_x, pos_y, kTileColor);
             continue;
         }
 
         // Draw empty space
-        image_pixels_.setColor(pos_x, pos_y, empty_color);
+        image_pixels_.setColor(pos_x, pos_y, kEmptySpaceColor);
     }
 }
 

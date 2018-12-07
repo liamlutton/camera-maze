@@ -21,15 +21,9 @@ void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
 
     ofPixels red_blob_pixels = image_pixels;
 
-    ofColor black;
-    black.set(0, 0, 0);
-
-    red_blob_pixels.setColor(black);
-
     for (int x = 0; x < Canvas::kCameraWidth; x++) {
         for (int y = 0; y < Canvas::kCameraHeight; y++) {
             ofColor color = image_pixels.getColor(x, y);
-
             if (color.r > color.b + color.g + added_value) {
                 color.set(255, 255, 255, 0);
                 red_blob_pixels.setColor(x, y, color);

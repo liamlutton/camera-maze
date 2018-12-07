@@ -30,4 +30,10 @@ class Canvas {
         static const int kCameraWidth = 1280;
         static const int kCameraHeight = 720;
 
+        static const ofColor kStartBlockColor(200, 0, 100); // Start block color
+        static const ofColor kTileColor(120, 0, 25, 0.5);
+        static const ofColor kWallColor(100, 100, 100, 1);
+        static const ofColor kEmptySpaceColor(255, 255, 255, 1);
+        static const ofColor kPlayerColor(0, 100, 255, 1);
+
 };
