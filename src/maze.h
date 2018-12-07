@@ -5,25 +5,30 @@
 enum MazePiece {
     kMazeEmpty,
     kMazeWall,
-    kMazeFruit
+    kMazeFruit,
+    kMazeEnd
 };
 
 class Maze {
 
     private:
-        int maze_board_[80][45]; // Size is maze width and maze height
+        int maze_board_[45][80]; // Size is height and width of maze
         int fov_;
+        int maze_start_row_;
+        int maze_start_column_;
+
+        bool user_alive_ = false;
 
     public:
-        Maze();
-        void move();
+        void setup();
+        void move(int r, int c);
+
+        bool isUserAlive();
         int getItemAt(int row, int column);
         int getWidth();
         int getHeight();
-
-        static const int kEmptySpaceId = 0;
-        static const int kWallId = 1;
-        static const int kFruitId = 2;
+        int getStartRow();
+        int getStartColumn();
 
         static const int kDefaultFov = 80;
 
