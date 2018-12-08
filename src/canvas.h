@@ -8,6 +8,8 @@
 class Canvas {
 
     private:
+        void setPixelColor(int x, int y, const ofColor &color);
+
         ofPixels image_pixels_;
         ofColor background_color_;
         Maze maze_;
@@ -17,10 +19,17 @@ class Canvas {
 
         ofPoint pen_position_;
 
+        static const ofColor kEmptyColor;
+        static const ofColor kWallColor;
+        static const ofColor kFruitColor;
+        static const ofColor kEndColor;
+        static const ofColor kStartColor;
+        static const ofColor kPlayerColor;
+        static const ofColor kTileColor;
+
     public:
         void setup();
-        void draw(const ofPoint &point, const ofColor &color);
-        void updatePosition(ofPoint new_position);
+        void updatePosition(const ofPoint &point);
         void display(ofxCvColorImage &image);
         void setFieldOfView(double fov);
 
@@ -29,11 +38,5 @@ class Canvas {
 
         static const int kCameraWidth = 1280;
         static const int kCameraHeight = 720;
-
-        static const ofColor kStartBlockColor(200, 0, 100); // Start block color
-        static const ofColor kTileColor(120, 0, 25, 0.5);
-        static const ofColor kWallColor(100, 100, 100, 1);
-        static const ofColor kEmptySpaceColor(255, 255, 255, 1);
-        static const ofColor kPlayerColor(0, 100, 255, 1);
 
 };

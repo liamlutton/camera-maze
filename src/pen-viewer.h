@@ -10,6 +10,7 @@ class PenViewer {
         void processImage();
         void setupCamera();
         void loadColorPixelImages(const ofPixels &image_pixels);
+        bool isPixelRed(int r, int g, int b);
 
         Canvas canvas_;
         ofVideoGrabber camera_;        
@@ -20,6 +21,12 @@ class PenViewer {
         ofPoint center_red_;
 
         ofColor current_color_;
+
+        static const int kGaussianBlur = 7; // How much pre-blob image is blurred
+        static const int kColorVibrancyConstant = 50;
+
+        static const int kSmallestBlobSize = 200;
+        static const int kLargestBlobSize = 4000;
 
     public:
         ofVideoGrabber getCamera() const;

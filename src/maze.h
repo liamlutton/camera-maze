@@ -29,6 +29,7 @@ class Maze {
         int getHeight();
         int getStartRow();
         int getStartColumn();
+        int getFov();
 
         static const int kDefaultFov = 50;
 

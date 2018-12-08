@@ -53,6 +53,10 @@ int Maze::getWidth() {
 
 }
 
+int Maze::getFov() {
+    return fov_;
+}
+
 int Maze::getHeight() {
     int height = sizeof(maze_board_)/sizeof(*maze_board_);
     return height;
