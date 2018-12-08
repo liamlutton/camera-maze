@@ -6,7 +6,7 @@ const ofColor Canvas::kEmptyColor = ofColor(255, 255, 255, 1); // Empty space co
 const ofColor Canvas::kWallColor = ofColor(100, 100, 100, 1); // Wall color, gray
 const ofColor Canvas::kFruitColor = ofColor(255, 0, 0, 1); // Fruit color, bright red
 const ofColor Canvas::kEndColor = ofColor(0, 255, 0, 1); // End color, bright green
-const ofColor Canvas::kStartColor = ofColor(200, 0, 100); // Start color, dark red
+const ofColor Canvas::kStartColor = ofColor(0, 255, 100); // Start color, dark red
 const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, cyan
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
@@ -67,7 +67,7 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
         int maze_row = pos_y / maze_block_height;
 
         // Drawing maze walls
-        if (maze_.getItemAt(maze_row, maze_column) == MazePiece::kMazeWall) {
+        if (maze_.getItemAt({maze_row, maze_column}) == MazePiece::kMazeWall) {
             setPixelColor(pos_x, pos_y, kWallColor);
             continue;
         }
@@ -117,7 +117,7 @@ void Canvas::updatePosition(const ofPoint &point) {
 
     int row = point.y / maze_block_width;
     int col = maze_.getWidth() - point.x / maze_block_width;
-    maze_.move(row, col);
+    maze_.move(MazePosition{row, col});
 
     if (maze_.isUserAlive()) {
         drawInGameScreen(point, maze_block_width, maze_block_height);

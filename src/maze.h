@@ -9,6 +9,11 @@ enum MazePiece {
     kMazeEnd
 };
 
+struct MazePosition {
+    int row;
+    int column;
+};
+
 class Maze {
 
     private:
@@ -21,10 +26,10 @@ class Maze {
 
     public:
         void setup();
-        void move(int r, int c);
+        void move(const MazePosition &position);
 
         bool isUserAlive();
-        int getItemAt(int row, int column);
+        int getItemAt(const MazePosition &position);
         int getWidth();
         int getHeight();
         int getStartRow();

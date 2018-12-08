@@ -18,11 +18,12 @@ void Maze::setup() {
     }
 }
 
-void Maze::move(int r, int c) {
-    int current_piece = maze_board_[r][c];
+void Maze::move(const MazePosition &position) {
+    int current_piece = maze_board_[position.row][position.column];
 
+    // Bring user to life from starting screen
     if (!user_alive_) {
-        if (r == maze_start_row_ && c == maze_start_column_) {
+        if (position.row == maze_start_row_ && position.column == maze_start_column_) {
             user_alive_ = true;
         }
         return;
@@ -34,7 +35,7 @@ void Maze::move(int r, int c) {
             break;
         case kMazeFruit:
             fov_ = kDefaultFov;
-            maze_board_[r][c] = kMazeEmpty;
+            maze_board_[position.row][position.column] = kMazeEmpty;
             break;
     }
 }
@@ -43,8 +44,8 @@ bool Maze::isUserAlive() {
     return user_alive_;
 }
 
-int Maze::getItemAt(int row, int column) {
-    return maze_board_[row][column];
+int Maze::getItemAt(const MazePosition &position) {
+    return maze_board_[position.row][position.column];
 }
 
 int Maze::getFov() {
