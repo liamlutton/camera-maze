@@ -47,14 +47,13 @@ int Maze::getItemAt(int row, int column) {
     return maze_board_[row][column];
 }
 
+int Maze::getFov() {
+    return fov_;
+}
+
 int Maze::getWidth() {
     int width = sizeof(maze_board_[0])/sizeof(*maze_board_[0]);
     return width;
-
-}
-
-int Maze::getFov() {
-    return fov_;
 }
 
 int Maze::getHeight() {

@@ -63,7 +63,7 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
         }
 
         // Determining the position on the maze which the pixel maps to
-        int maze_column = pos_x / maze_block_width;
+        int maze_column = (kCameraWidth - pos_x) / maze_block_width;
         int maze_row = pos_y / maze_block_height;
 
         // Drawing maze walls
@@ -92,12 +92,13 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
 void Canvas::drawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(kEmptyColor);
 
+    int start_x_pos = (maze_.getWidth() - maze_.getStartColumn() - 1) * maze_block_width;
+    int start_y_pos = maze_.getStartRow() * maze_block_height;
+
     // Drawing start box
-    for (int start_x = 0; start_x < maze_block_width; start_x++) {
-        for (int start_y = 0; start_y < maze_block_height; start_y++) {
-            int x_pixel_pos = start_x + maze_.getStartColumn() * maze_block_width;
-            int y_pixel_pos = start_y + maze_.getStartRow() * maze_block_height;
-            setPixelColor(x_pixel_pos, y_pixel_pos, kStartColor);
+    for (int xi = 0; xi < maze_block_width; xi++) {
+        for (int yi = 0; yi < maze_block_height; yi++) {
+            setPixelColor(xi + start_x_pos, yi + start_y_pos, kStartColor);
         }
     }
 
@@ -114,12 +115,14 @@ void Canvas::updatePosition(const ofPoint &point) {
     int maze_block_width = kCameraWidth / maze_.getWidth();
     int maze_block_height = kCameraHeight / maze_.getHeight();
 
-    maze_.move(point.y / maze_block_width, point.x / maze_block_width);
+    int row = point.y / maze_block_width;
+    int col = maze_.getWidth() - point.x / maze_block_width;
+    maze_.move(row, col);
 
-    if (!maze_.isUserAlive()) {
-        drawPreGameScreen(point, maze_block_width, maze_block_height);
-    } else {
+    if (maze_.isUserAlive()) {
         drawInGameScreen(point, maze_block_width, maze_block_height);
+    } else {
+        drawPreGameScreen(point, maze_block_width, maze_block_height);
     }
 }
 
