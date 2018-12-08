@@ -1,6 +1,7 @@
 #include "canvas.h"
 #include <math.h>
 
+// Initialize all constant colors
 const ofColor Canvas::kEmptyColor = ofColor(255, 255, 255, 1); // Empty space color, white
 const ofColor Canvas::kWallColor = ofColor(100, 100, 100, 1); // Wall color, gray
 const ofColor Canvas::kFruitColor = ofColor(255, 0, 0, 1); // Fruit color, bright red
@@ -49,34 +50,7 @@ void Canvas::setFieldOfView(double fov) {
     }
 }
 
-// Draw at a specified point
-void Canvas::updatePosition(const ofPoint &point) {
-    int maze_block_width = kCameraWidth / maze_.getWidth();
-    int maze_block_height = kCameraHeight / maze_.getHeight();
-
-    maze_.move(point.y / maze_block_width, point.x / maze_block_width);
-
-    if (!maze_.isUserAlive()) {
-        image_pixels_.setColor(kEmptyColor);
-
-        // Drawing start box
-        for (int start_x = 0; start_x < maze_block_width; start_x++) {
-            for (int start_y = 0; start_y < maze_block_height; start_y++) {
-                int x_pixel_pos = start_x + maze_.getStartColumn() * maze_block_width;
-                int y_pixel_pos = start_y + maze_.getStartRow() * maze_block_height;
-                setPixelColor(x_pixel_pos, y_pixel_pos, kStartColor);
-            }
-        }
-
-        // Drawing player
-        for (int rel_x = -3; rel_x <= 3; rel_x++) {
-            for (int rel_y = -3; rel_y <= 3; rel_y++) {
-                setPixelColor(point.x + rel_x, point.y + rel_y, kPlayerColor);
-            }
-        }
-        return;
-    }
-
+void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(background_color_);
 
     for (ofPoint rel_point : fov_rel_points_) {
@@ -105,13 +79,47 @@ void Canvas::updatePosition(const ofPoint &point) {
         }
 
         // Drawing maze tiles
-        if (pos_x % kTileSpacingPx == 0 || pos_y % kTileSpacingPx == 0) {
+        if (pos_x % maze_block_width == 0 || pos_y % maze_block_height == 0) {
             setPixelColor(pos_x, pos_y, kTileColor);
             continue;
         }
 
         // Draw empty space
         setPixelColor(pos_x, pos_y, kEmptyColor);
+    }
+}
+
+void Canvas::drawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
+    image_pixels_.setColor(kEmptyColor);
+
+    // Drawing start box
+    for (int start_x = 0; start_x < maze_block_width; start_x++) {
+        for (int start_y = 0; start_y < maze_block_height; start_y++) {
+            int x_pixel_pos = start_x + maze_.getStartColumn() * maze_block_width;
+            int y_pixel_pos = start_y + maze_.getStartRow() * maze_block_height;
+            setPixelColor(x_pixel_pos, y_pixel_pos, kStartColor);
+        }
+    }
+
+    // Drawing player
+    for (int rel_x = -3; rel_x <= 3; rel_x++) {
+        for (int rel_y = -3; rel_y <= 3; rel_y++) {
+            setPixelColor(point.x + rel_x, point.y + rel_y, kPlayerColor);
+        }
+    }
+}
+
+// Draw at a specified point
+void Canvas::updatePosition(const ofPoint &point) {
+    int maze_block_width = kCameraWidth / maze_.getWidth();
+    int maze_block_height = kCameraHeight / maze_.getHeight();
+
+    maze_.move(point.y / maze_block_width, point.x / maze_block_width);
+
+    if (!maze_.isUserAlive()) {
+        drawPreGameScreen(point, maze_block_width, maze_block_height);
+    } else {
+        drawInGameScreen(point, maze_block_width, maze_block_height);
     }
 }
 

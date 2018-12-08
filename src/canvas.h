@@ -10,6 +10,10 @@ class Canvas {
     private:
         void setPixelColor(int x, int y, const ofColor &color);
 
+        // Drawing screen for entering maze and playing maze respectively
+        void drawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height);
+        void drawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height);
+
         ofPixels image_pixels_;
         ofColor background_color_;
         Maze maze_;
@@ -34,7 +38,6 @@ class Canvas {
         void setFieldOfView(double fov);
 
         static const int kSmallestFov = 1;
-        static const int kTileSpacingPx = 30;
 
         static const int kCameraWidth = 1280;
         static const int kCameraHeight = 720;
