@@ -1,16 +1,16 @@
 #include "pen-viewer.h"
 
-void PenViewer::setup() {
-    setupCamera();
+void PenViewer::Setup() {
+    SetupCamera();
     display_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
-    canvas_.setup();
+    canvas_.Setup();
 }
 
-void PenViewer::setupCamera() {
+void PenViewer::SetupCamera() {
     camera_.setup(Canvas::kCameraWidth, Canvas::kCameraHeight);
 }
 
-void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
+void PenViewer::LoadColorPixelImages(const ofPixels &image_pixels) {
     if (!red_blob_image_.bAllocated) {
         red_blob_image_.allocate(Canvas::kCameraWidth, Canvas::kCameraHeight);
     }
@@ -23,7 +23,7 @@ void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
     for (int x = 0; x < Canvas::kCameraWidth; x++) {
         for (int y = 0; y < Canvas::kCameraHeight; y++) {
             ofColor color = image_pixels.getColor(x, y);
-            if (isPixelRed(color.r, color.g, color.b)) {
+            if (IsPixelRed(color.r, color.g, color.b)) {
                 red_blob_pixels.setColor(x, y, ofColor(255, 255, 255, 1));
             }
         }
@@ -31,13 +31,13 @@ void PenViewer::loadColorPixelImages(const ofPixels &image_pixels) {
     red_blob_image_.setFromPixels(red_blob_pixels);
 }
 
-bool PenViewer::isPixelRed(int r, int g, int b) {
+bool PenViewer::IsPixelRed(int r, int g, int b) {
     // Red must be greater than both blue and green.
     // More selective based on color vibrancy constant.
     return r > g + b + kColorVibrancyConstant;
 }
 
-void PenViewer::update() {
+void PenViewer::Update() {
     camera_.update();
 
     if (camera_.isFrameNew()) {
@@ -57,12 +57,12 @@ void PenViewer::update() {
 
         image_pixels = current_frame_image.getPixels();
 
-        loadColorPixelImages(image_pixels);
-        processImage();
+        LoadColorPixelImages(image_pixels);
+        ProcessImage();
     }
 }
 
-void PenViewer::processImage() {
+void PenViewer::ProcessImage() {
     // Ensure that the colored blob images are allocated
     if (!red_blob_image_.bAllocated) {
         return;
@@ -76,20 +76,20 @@ void PenViewer::processImage() {
 
     if (contour_finder_.blobs.size() == 1) {
         center_red_ = contour_finder_.blobs[0].centroid;
-        canvas_.updatePosition(center_red_);
+        canvas_.UpdatePosition(center_red_);
     }
 
-    canvas_.display(display_image_);
+    canvas_.Display(display_image_);
 }
 
-Canvas PenViewer::getCanvas() const {
+Canvas PenViewer::GetCanvas() const {
     return canvas_;
 }
 
-ofVideoGrabber PenViewer::getCamera() const {
+ofVideoGrabber PenViewer::GetCamera() const {
     return camera_;
 }
 
-ofxCvColorImage PenViewer::getDisplayImage() const {
+ofxCvColorImage PenViewer::GetDisplayImage() const {
     return display_image_;
 }

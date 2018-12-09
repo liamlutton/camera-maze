@@ -25,14 +25,14 @@ class Maze {
 
     public:
         void Load(std::string maze_name);
-        void move(const MazePosition &position);
+        void Move(const MazePosition &position);
 
-        bool isUserAlive();
-        int getItemAt(const MazePosition &position);
-        int getWidth();
-        int getHeight();
-        MazePosition getStartPosition();
-        int getFov();
+        bool IsUserAlive();
+        int GetItemAt(const MazePosition &position);
+        int GetWidth();
+        int GetHeight();
+        MazePosition GetStartPosition();
+        int GetFov();
 
         static const int kDefaultFov = 50;
 

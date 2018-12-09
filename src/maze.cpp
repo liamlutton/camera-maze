@@ -38,7 +38,7 @@ void Maze::Load(std::string maze_name) {
     input_file.close();
 }
 
-void Maze::move(const MazePosition &position) {
+void Maze::Move(const MazePosition &position) {
     int current_piece = maze_board_[position.row][position.column];
 
     // Bring user to life from starting screen
@@ -60,28 +60,28 @@ void Maze::move(const MazePosition &position) {
     }
 }
 
-bool Maze::isUserAlive() {
+bool Maze::IsUserAlive() {
     return user_alive_;
 }
 
-int Maze::getItemAt(const MazePosition &position) {
+int Maze::GetItemAt(const MazePosition &position) {
     return maze_board_[position.row][position.column];
 }
 
-int Maze::getFov() {
+int Maze::GetFov() {
     return fov_;
 }
 
-int Maze::getWidth() {
+int Maze::GetWidth() {
     int width = sizeof(maze_board_[0])/sizeof(*maze_board_[0]);
     return width;
 }
 
-int Maze::getHeight() {
+int Maze::GetHeight() {
     int height = sizeof(maze_board_)/sizeof(*maze_board_);
     return height;
 }
 
-MazePosition Maze::getStartPosition() {
+MazePosition Maze::GetStartPosition() {
     return maze_start_pos_;
 }

@@ -7,10 +7,10 @@
 class PenViewer {
 
     private:
-        void processImage();
-        void setupCamera();
-        void loadColorPixelImages(const ofPixels &image_pixels);
-        bool isPixelRed(int r, int g, int b);
+        void ProcessImage();
+        void SetupCamera();
+        void LoadColorPixelImages(const ofPixels &image_pixels);
+        bool IsPixelRed(int r, int g, int b);
 
         Canvas canvas_;
         ofVideoGrabber camera_;        
@@ -29,12 +29,12 @@ class PenViewer {
         static const int kLargestBlobSize = 4000;
 
     public:
-        ofVideoGrabber getCamera() const;
-        ofxCvColorImage getDisplayImage() const;
-        Canvas getCanvas() const;
-        bool isImageLoaded();
+        ofVideoGrabber GetCamera() const;
+        ofxCvColorImage GetDisplayImage() const;
+        Canvas GetCanvas() const;
+        bool IsImageLoaded();
 
-        void update();
-        void setup();
+        void Update();
+        void Setup();
 
 };

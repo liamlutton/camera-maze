@@ -2,22 +2,22 @@
 
 //--------------------------------------------------------------
 void ofFingerPaint::setup(){
-    pen_viewer_.setup();
+    pen_viewer_.Setup();
 }
 
 //--------------------------------------------------------------
 void ofFingerPaint::update(){
-    pen_viewer_.update();
+    pen_viewer_.Update();
 }
 
 //--------------------------------------------------------------
 void ofFingerPaint::draw(){
     // Make sure display image is allocated
-    if (!pen_viewer_.getDisplayImage().bAllocated) {
+    if (!pen_viewer_.GetDisplayImage().bAllocated) {
         return;
     }
 
-    ofxCvColorImage image = pen_viewer_.getDisplayImage();
+    ofxCvColorImage image = pen_viewer_.GetDisplayImage();
     image.draw(image_x_ + image.getWidth(), image_y_, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
 }
 

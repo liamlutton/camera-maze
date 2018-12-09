@@ -10,18 +10,18 @@ const ofColor Canvas::kStartColor = ofColor(0, 255, 100); // Start color, dark r
 const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, cyan
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
-void Canvas::setup() {
+void Canvas::Setup() {
     maze_.Load("maze1");
     image_pixels_.allocate(kCameraWidth, kCameraHeight, OF_IMAGE_COLOR);
     background_color_.set(0, 0, 0, 1);
 
-    setFieldOfView(maze_.getFov());
+    SetFieldOfView(maze_.GetFov());
 
     // Sets background color
     image_pixels_.setColor(background_color_);
 }
 
-void Canvas::setFieldOfView(double fov) {
+void Canvas::SetFieldOfView(double fov) {
     // Set smallest fov size
     if (fov < kSmallestFov) {
         fov = kSmallestFov;
@@ -50,7 +50,7 @@ void Canvas::setFieldOfView(double fov) {
     }
 }
 
-void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
+void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(background_color_);
 
     for (ofPoint rel_point : fov_rel_points_) {
@@ -67,77 +67,77 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
         int maze_row = pos_y / maze_block_height;
 
         // Drawing maze pieces
-        switch (maze_.getItemAt({maze_row, maze_column})) {
+        switch (maze_.GetItemAt({maze_row, maze_column})) {
             case MazePiece::kMazeWall:
-                setPixelColor(pos_x, pos_y, kWallColor);
+                SetPixelColor(pos_x, pos_y, kWallColor);
                 continue;
             case MazePiece::kMazeFruit:
-                setPixelColor(pos_x, pos_y, kFruitColor);
+                SetPixelColor(pos_x, pos_y, kFruitColor);
                 continue;
             case MazePiece::kMazeEnd:
-                setPixelColor(pos_x, pos_y, kMazeEnd);
+                SetPixelColor(pos_x, pos_y, kMazeEnd);
                 continue;
         }
 
         // Drawing player
         if (fabs(pos_x - point.x) <= 3 && fabs(pos_y - point.y) <= 3) {
-            setPixelColor(pos_x, pos_y, kPlayerColor);
+            SetPixelColor(pos_x, pos_y, kPlayerColor);
             continue;
         }
         // Drawing maze tiles
         if (pos_x % maze_block_width == 0 || pos_y % maze_block_height == 0) {
-            setPixelColor(pos_x, pos_y, kTileColor);
+            SetPixelColor(pos_x, pos_y, kTileColor);
             continue;
         }
 
         // Draw empty space
-        setPixelColor(pos_x, pos_y, kEmptyColor);
+        SetPixelColor(pos_x, pos_y, kEmptyColor);
     }
 }
 
-void Canvas::drawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
+void Canvas::DrawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(kEmptyColor);
-    MazePosition start_position = maze_.getStartPosition();
+    MazePosition start_position = maze_.GetStartPosition();
 
-    int start_x_pos = (maze_.getWidth() - start_position.column - 1) * maze_block_width;
+    int start_x_pos = (maze_.GetWidth() - start_position.column - 1) * maze_block_width;
     int start_y_pos = start_position.row * maze_block_height;
 
     // Drawing start box
     for (int xi = 0; xi < maze_block_width; xi++) {
         for (int yi = 0; yi < maze_block_height; yi++) {
-            setPixelColor(xi + start_x_pos, yi + start_y_pos, kStartColor);
+            SetPixelColor(xi + start_x_pos, yi + start_y_pos, kStartColor);
         }
     }
 
     // Drawing player
     for (int rel_x = -3; rel_x <= 3; rel_x++) {
         for (int rel_y = -3; rel_y <= 3; rel_y++) {
-            setPixelColor(point.x + rel_x, point.y + rel_y, kPlayerColor);
+            SetPixelColor(point.x + rel_x, point.y + rel_y, kPlayerColor);
         }
     }
 }
 
 // Draw at a specified point
-void Canvas::updatePosition(const ofPoint &point) {
-    int maze_block_width = kCameraWidth / maze_.getWidth();
-    int maze_block_height = kCameraHeight / maze_.getHeight();
+void Canvas::UpdatePosition(const ofPoint &point) {
+    int maze_block_width = kCameraWidth / maze_.GetWidth();
+    int maze_block_height = kCameraHeight / maze_.GetHeight();
 
     int row = point.y / maze_block_width;
-    int col = maze_.getWidth() - point.x / maze_block_width;
-    maze_.move(MazePosition{row, col});
+    int col = maze_.GetWidth() - point.x / maze_block_width;
+    maze_.Move(MazePosition{row, col});
 
-    if (maze_.isUserAlive()) {
-        drawInGameScreen(point, maze_block_width, maze_block_height);
+    if (maze_.IsUserAlive()) {
+        DrawInGameScreen(point, maze_block_width, maze_block_height);
     } else {
-        drawPreGameScreen(point, maze_block_width, maze_block_height);
+        DrawPreGameScreen(point, maze_block_width, maze_block_height);
     }
 }
 
 // Allows setting a pixel color from a constant color object. Sets to canvas pixels.
-void Canvas::setPixelColor(int x, int y, const ofColor &color) {
+void Canvas::SetPixelColor(int x, int y, const ofColor &color) {
     image_pixels_.setColor(x, y, ofColor(color.r, color.g, color.b, color.a));
 }
 
-void Canvas::display(ofxCvColorImage &image) {
+void Canvas::Display(ofxCvColorImage &image) {
     image.setFromPixels(image_pixels_);
 }
