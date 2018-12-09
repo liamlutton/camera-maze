@@ -1,21 +1,41 @@
 #include "maze.h"
+#include <fstream>
 
-void Maze::setup() {
+void Maze::Load(std::string maze_name) {
     fov_ = kDefaultFov;
 
-    // Temporary maze
+    std::ifstream input_file;
+    input_file.open(ofToDataPath(maze_name));
 
-    maze_start_row_ = 4;
-    maze_start_column_ = 10;
-    for (int r = 0; r < 45; r++) {
-        for (int c = 0; c < 80; c++) {
-            if (r == 15 && c != 12) {
-                maze_board_[r][c] = MazePiece::kMazeWall;
-            } else {
-                maze_board_[r][c] = MazePiece::kMazeEmpty;
+    std::string line;
+    int row = 0;
+    while (input_file >> line) {
+        for (int col = 0; col < line.size(); col++) {
+            MazePiece maze_piece;
+            char id = line[col];
+
+            switch (id) {
+                case 'S':
+                    maze_start_pos_ = {row, col};
+                case '0':
+                    maze_piece = kMazeEmpty;
+                    break;
+                case '1':
+                    maze_piece = kMazeWall;
+                    break;
+                case 'E':
+                    maze_piece = kMazeEnd;
+                    break;
+                case 'F':
+                    maze_piece = kMazeFruit;
+                    break;
             }
+
+            maze_board_[row][col] = maze_piece;
         }
+        row++;
     }
+    input_file.close();
 }
 
 void Maze::move(const MazePosition &position) {
@@ -23,7 +43,7 @@ void Maze::move(const MazePosition &position) {
 
     // Bring user to life from starting screen
     if (!user_alive_) {
-        if (position.row == maze_start_row_ && position.column == maze_start_column_) {
+        if (position.row == maze_start_pos_.row && position.column == maze_start_pos_.column) {
             user_alive_ = true;
         }
         return;
@@ -62,10 +82,6 @@ int Maze::getHeight() {
     return height;
 }
 
-int Maze::getStartRow() {
-    return maze_start_row_;
-}
-
-int Maze::getStartColumn() {
-    return maze_start_column_;
+MazePosition Maze::getStartPosition() {
+    return maze_start_pos_;
 }

@@ -11,7 +11,7 @@ const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, c
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
 void Canvas::setup() {
-    maze_.setup();
+    maze_.Load("maze1");
     image_pixels_.allocate(kCameraWidth, kCameraHeight, OF_IMAGE_COLOR);
     background_color_.set(0, 0, 0, 1);
 
@@ -66,10 +66,17 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
         int maze_column = (kCameraWidth - pos_x) / maze_block_width;
         int maze_row = pos_y / maze_block_height;
 
-        // Drawing maze walls
-        if (maze_.getItemAt({maze_row, maze_column}) == MazePiece::kMazeWall) {
-            setPixelColor(pos_x, pos_y, kWallColor);
-            continue;
+        // Drawing maze pieces
+        switch (maze_.getItemAt({maze_row, maze_column})) {
+            case MazePiece::kMazeWall:
+                setPixelColor(pos_x, pos_y, kWallColor);
+                continue;
+            case MazePiece::kMazeFruit:
+                setPixelColor(pos_x, pos_y, kFruitColor);
+                continue;
+            case MazePiece::kMazeEnd:
+                setPixelColor(pos_x, pos_y, kMazeEnd);
+                continue;
         }
 
         // Drawing player
@@ -77,7 +84,6 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
             setPixelColor(pos_x, pos_y, kPlayerColor);
             continue;
         }
-
         // Drawing maze tiles
         if (pos_x % maze_block_width == 0 || pos_y % maze_block_height == 0) {
             setPixelColor(pos_x, pos_y, kTileColor);
@@ -91,9 +97,10 @@ void Canvas::drawInGameScreen(const ofPoint &point, int maze_block_width, int ma
 
 void Canvas::drawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(kEmptyColor);
+    MazePosition start_position = maze_.getStartPosition();
 
-    int start_x_pos = (maze_.getWidth() - maze_.getStartColumn() - 1) * maze_block_width;
-    int start_y_pos = maze_.getStartRow() * maze_block_height;
+    int start_x_pos = (maze_.getWidth() - start_position.column - 1) * maze_block_width;
+    int start_y_pos = start_position.row * maze_block_height;
 
     // Drawing start box
     for (int xi = 0; xi < maze_block_width; xi++) {
