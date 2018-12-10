@@ -27,6 +27,7 @@ void Maze::Load(std::string maze_name) {
                     maze_piece = kMazeEnd;
                     break;
                 case 'F':
+
                     maze_piece = kMazeFruit;
                     break;
             }
@@ -49,15 +50,23 @@ void Maze::Move(const MazePosition &position) {
         return;
     }
 
-    switch(current_piece) {
+    switch (current_piece) {
         case kMazeWall:
-            user_alive_ = false;
+            KillPlayer();
             break;
         case kMazeFruit:
             fov_ = kDefaultFov;
             maze_board_[position.row][position.column] = kMazeEmpty;
             break;
     }
+}
+
+void Maze::KillPlayer() {
+    // Refill fruit
+    for (MazePosition fruit_position : fruit_positions_) {
+        maze_board_[fruit_position.row][fruit_position.column] = kMazeFruit;
+    }
+    user_alive_ = false;
 }
 
 bool Maze::IsUserAlive() {

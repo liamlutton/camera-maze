@@ -11,7 +11,7 @@ const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, c
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
 void Canvas::Setup() {
-    maze_.Load("maze1");
+    maze_.Load("maze2");
     image_pixels_.allocate(kCameraWidth, kCameraHeight, OF_IMAGE_COLOR);
     background_color_.set(0, 0, 0, 1);
 

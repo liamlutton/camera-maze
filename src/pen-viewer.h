@@ -26,7 +26,7 @@ class PenViewer {
         static const int kColorVibrancyConstant = 50;
 
         static const int kSmallestBlobSize = 200;
-        static const int kLargestBlobSize = 4000;
+        static const int kLargestBlobSize = 8000;
 
     public:
         ofVideoGrabber GetCamera() const;
