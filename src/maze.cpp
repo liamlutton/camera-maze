@@ -41,6 +41,9 @@ void Maze::Load(std::string maze_name) {
 
 void Maze::Move(const MazePosition &position) {
     fov_ -= kFovLossValue;
+    if (fov_ < kMinFov) {
+        fov_ = kMinFov;
+    }
     int current_piece = maze_board_[position.row][position.column];
 
     // Bring user to life from starting screen

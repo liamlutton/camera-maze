@@ -45,6 +45,7 @@ class Maze {
         static const char kFruitSymbol = 'F';
 
         static const int kDefaultFov = 80;
+        static const int kMinFov = 40;
         static constexpr double kFovLossValue = 0.025;
 
 };
