@@ -40,6 +40,7 @@ void Maze::Load(std::string maze_name) {
 }
 
 void Maze::Move(const MazePosition &position) {
+    fov_ -= kFovLossValue;
     int current_piece = maze_board_[position.row][position.column];
 
     // Bring user to life from starting screen
@@ -52,7 +53,7 @@ void Maze::Move(const MazePosition &position) {
 
     switch (current_piece) {
         case kMazeWall:
-            KillPlayer();
+            KillUser();
             break;
         case kMazeFruit:
             fov_ = kDefaultFov;
@@ -61,7 +62,7 @@ void Maze::Move(const MazePosition &position) {
     }
 }
 
-void Maze::KillPlayer() {
+void Maze::KillUser() {
     // Refill fruit
     for (MazePosition fruit_position : fruit_positions_) {
         maze_board_[fruit_position.row][fruit_position.column] = kMazeFruit;

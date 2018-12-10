@@ -51,6 +51,9 @@ void Canvas::SetFieldOfView(double fov) {
 }
 
 void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
+    // Update field of view
+    SetFieldOfView(maze_.GetFov());
+
     image_pixels_.setColor(background_color_);
 
     for (ofPoint rel_point : fov_rel_points_) {
