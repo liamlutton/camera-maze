@@ -15,19 +15,19 @@ void Maze::Load(std::string maze_name) {
             char id = line[col];
 
             switch (id) {
-                case 'S':
+                case kStartSymbol:
                     maze_start_pos_ = {row, col};
-                case '0':
+                case kEmptySymbol:
                     maze_piece = kMazeEmpty;
                     break;
-                case '1':
+                case kWallSymbol:
                     maze_piece = kMazeWall;
                     break;
-                case 'E':
+                case kEndSymbol:
                     maze_piece = kMazeEnd;
                     break;
-                case 'F':
-
+                case kFruitSymbol:
+                    fov_ = kDefaultFov;
                     maze_piece = kMazeFruit;
                     break;
             }

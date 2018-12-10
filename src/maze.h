@@ -38,6 +38,12 @@ class Maze {
         MazePosition GetStartPosition();
         int GetFov();
 
+        static const char kStartSymbol = 'S';
+        static const char kEmptySymbol = '0';
+        static const char kWallSymbol = '1';
+        static const char kEndSymbol = 'E';
+        static const char kFruitSymbol = 'F';
+
         static const int kDefaultFov = 80;
         static constexpr double kFovLossValue = 0.025;
 
