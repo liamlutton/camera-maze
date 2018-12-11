@@ -33,6 +33,7 @@ bool Maze::Load(std::string maze_name) {
                     maze_piece = kMazeEnd;
                     break;
                 case kFruitSymbol:
+                    fruit_positions_.push_back({row, col});
                     fov_ = kDefaultFov;
                     maze_piece = kMazeFruit;
                     break;
