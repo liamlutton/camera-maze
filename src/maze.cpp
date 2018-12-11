@@ -4,6 +4,7 @@
 // Returns true if loaded properly
 bool Maze::Load(std::string maze_name) {
     fov_ = kDefaultFov;
+    last_position_ = MazePosition{-1, -1};
 
     std::ifstream input_file;
     input_file.open(ofToDataPath(maze_name));
@@ -63,6 +64,16 @@ bool Maze::Move(const MazePosition &position) {
         return false;
     }
 
+    // Make sure user is not teleporting
+    if (last_position_.row != -1 && last_position_.column != -1) {
+        if (fabs(position.row - last_position_.row) > 1 || fabs(position.column - last_position_.column) > 1) {
+            KillUser();
+            return false;
+        }
+    }
+
+    last_position_ = position;
+
     switch (current_piece) {
         case kMazeWall:
             KillUser();
@@ -78,6 +89,7 @@ bool Maze::Move(const MazePosition &position) {
 }
 
 void Maze::KillUser() {
+    last_position_ = MazePosition{-1, -1};
     fov_ = kDefaultFov;
     // Refill fruit
     for (MazePosition fruit_position : fruit_positions_) {

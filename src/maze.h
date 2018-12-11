@@ -25,6 +25,7 @@ class Maze {
         MazePosition maze_start_pos_;
         std::vector<MazePosition> fruit_positions_; // Used to save fruit for when map resets
 
+        MazePosition last_position_;
         bool user_alive_ = false;
 
     public:
