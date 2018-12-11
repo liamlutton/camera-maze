@@ -28,8 +28,8 @@ class Maze {
         bool user_alive_ = false;
 
     public:
-        void Load(std::string maze_name);
-        void Move(const MazePosition &position);
+        bool Load(std::string maze_name);
+        bool Move(const MazePosition &position);
 
         bool IsUserAlive();
         int GetItemAt(const MazePosition &position);

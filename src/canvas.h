@@ -16,7 +16,9 @@ class Canvas {
 
         ofPixels image_pixels_;
         ofColor background_color_;
-        Maze maze_;
+
+        std::vector<Maze> mazes_;
+        int current_maze_index_ = 0;
 
         double fov_;
         std::vector<ofPoint> fov_rel_points_;
@@ -33,6 +35,7 @@ class Canvas {
 
     public:
         void Setup();
+        void LoadMazes(int maze_index);
         void UpdatePosition(const ofPoint &point);
         void Display(ofxCvColorImage &image);
         void SetFieldOfView(double fov);

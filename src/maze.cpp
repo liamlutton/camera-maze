@@ -1,12 +1,18 @@
 #include "maze.h"
 #include <fstream>
 
-void Maze::Load(std::string maze_name) {
+// Returns true if loaded properly
+bool Maze::Load(std::string maze_name) {
     fov_ = kDefaultFov;
 
     std::ifstream input_file;
     input_file.open(ofToDataPath(maze_name));
 
+    if (!input_file.is_open()) {
+        return false;
+    }
+
+    // Read file line by line, load to maze
     std::string line;
     int row = 0;
     while (input_file >> line) {
@@ -37,9 +43,11 @@ void Maze::Load(std::string maze_name) {
         row++;
     }
     input_file.close();
+    return true;
 }
 
-void Maze::Move(const MazePosition &position) {
+// Returns true if user won the maze
+bool Maze::Move(const MazePosition &position) {
     fov_ -= kFovLossValue;
     if (fov_ < kMinFov) {
         fov_ = kMinFov;
@@ -51,7 +59,7 @@ void Maze::Move(const MazePosition &position) {
         if (position.row == maze_start_pos_.row && position.column == maze_start_pos_.column) {
             user_alive_ = true;
         }
-        return;
+        return false;
     }
 
     switch (current_piece) {
@@ -62,10 +70,14 @@ void Maze::Move(const MazePosition &position) {
             fov_ = kDefaultFov;
             maze_board_[position.row][position.column] = kMazeEmpty;
             break;
+        case kMazeEnd:
+            return true;
     }
+    return false;
 }
 
 void Maze::KillUser() {
+    fov_ = kDefaultFov;
     // Refill fruit
     for (MazePosition fruit_position : fruit_positions_) {
         maze_board_[fruit_position.row][fruit_position.column] = kMazeFruit;

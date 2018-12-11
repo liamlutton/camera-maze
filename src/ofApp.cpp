@@ -18,7 +18,10 @@ void ofFingerPaint::draw(){
     }
 
     ofxCvColorImage image = pen_viewer_.GetDisplayImage();
-    image.draw(image_x_ + image.getWidth(), image_y_, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
+    image.draw(kImageX + image.getWidth(), kImageY, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
+
+    ofDrawBitmapString("Maps:", 10, 10);
+    
 }
 
 //--------------------------------------------------------------

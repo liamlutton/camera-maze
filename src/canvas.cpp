@@ -2,8 +2,8 @@
 #include <math.h>
 
 // Initialize all constant colors
-const ofColor Canvas::kEmptyColor = ofColor(255, 255, 255, 1); // Empty space color, white
-const ofColor Canvas::kWallColor = ofColor(100, 100, 100, 1); // Wall color, gray
+const ofColor Canvas::kEmptyColor = ofColor(220, 220, 220, 0.8); // Empty space color, green
+const ofColor Canvas::kWallColor = ofColor(50, 50, 50, 1); // Wall color, gray
 const ofColor Canvas::kFruitColor = ofColor(255, 0, 0, 1); // Fruit color, bright red
 const ofColor Canvas::kEndColor = ofColor(0, 255, 0, 1); // End color, bright green
 const ofColor Canvas::kStartColor = ofColor(0, 255, 100); // Start color, dark red
@@ -11,14 +11,25 @@ const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, c
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
 void Canvas::Setup() {
-    maze_.Load("maze2");
+    LoadMazes(0);
     image_pixels_.allocate(kCameraWidth, kCameraHeight, OF_IMAGE_COLOR);
     background_color_.set(0, 0, 0, 1);
 
-    SetFieldOfView(maze_.GetFov());
+    SetFieldOfView(mazes_[current_maze_index_].GetFov());
 
     // Sets background color
     image_pixels_.setColor(background_color_);
+}
+
+void Canvas::LoadMazes(int maze_index) {
+    std::cout << maze_index << std::endl;
+    Maze maze;
+    // If maze loads
+    if (maze.Load("maze_" + std::to_string(maze_index))) {
+        std::cout << maze_index << std::endl;
+        mazes_.push_back(maze);
+        LoadMazes(maze_index + 1);
+    }
 }
 
 void Canvas::SetFieldOfView(double fov) {
@@ -52,7 +63,7 @@ void Canvas::SetFieldOfView(double fov) {
 
 void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     // Update field of view
-    SetFieldOfView(maze_.GetFov());
+    SetFieldOfView(mazes_[current_maze_index_].GetFov());
 
     image_pixels_.setColor(background_color_);
 
@@ -69,8 +80,20 @@ void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int ma
         int maze_column = (kCameraWidth - pos_x) / maze_block_width;
         int maze_row = pos_y / maze_block_height;
 
+        // Drawing player
+        if (fabs(pos_x - point.x) <= 3 && fabs(pos_y - point.y) <= 3) {
+            SetPixelColor(pos_x, pos_y, kPlayerColor);
+            continue;
+        }
+
+        // Drawing maze tiles
+        if (pos_x % maze_block_width == 0 || pos_y % maze_block_height == 0) {
+            SetPixelColor(pos_x, pos_y, kTileColor);
+            continue;
+        }
+
         // Drawing maze pieces
-        switch (maze_.GetItemAt({maze_row, maze_column})) {
+        switch (mazes_[current_maze_index_].GetItemAt({maze_row, maze_column})) {
             case MazePiece::kMazeWall:
                 SetPixelColor(pos_x, pos_y, kWallColor);
                 continue;
@@ -82,17 +105,6 @@ void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int ma
                 continue;
         }
 
-        // Drawing player
-        if (fabs(pos_x - point.x) <= 3 && fabs(pos_y - point.y) <= 3) {
-            SetPixelColor(pos_x, pos_y, kPlayerColor);
-            continue;
-        }
-        // Drawing maze tiles
-        if (pos_x % maze_block_width == 0 || pos_y % maze_block_height == 0) {
-            SetPixelColor(pos_x, pos_y, kTileColor);
-            continue;
-        }
-
         // Draw empty space
         SetPixelColor(pos_x, pos_y, kEmptyColor);
     }
@@ -100,9 +112,9 @@ void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int ma
 
 void Canvas::DrawPreGameScreen(const ofPoint &point, int maze_block_width, int maze_block_height) {
     image_pixels_.setColor(kEmptyColor);
-    MazePosition start_position = maze_.GetStartPosition();
+    MazePosition start_position = mazes_[current_maze_index_].GetStartPosition();
 
-    int start_x_pos = (maze_.GetWidth() - start_position.column - 1) * maze_block_width;
+    int start_x_pos = (mazes_[current_maze_index_].GetWidth() - start_position.column - 1) * maze_block_width;
     int start_y_pos = start_position.row * maze_block_height;
 
     // Drawing start box
@@ -122,14 +134,18 @@ void Canvas::DrawPreGameScreen(const ofPoint &point, int maze_block_width, int m
 
 // Draw at a specified point
 void Canvas::UpdatePosition(const ofPoint &point) {
-    int maze_block_width = kCameraWidth / maze_.GetWidth();
-    int maze_block_height = kCameraHeight / maze_.GetHeight();
+    int maze_block_width = kCameraWidth / mazes_[current_maze_index_].GetWidth();
+    int maze_block_height = kCameraHeight / mazes_[current_maze_index_].GetHeight();
 
     int row = point.y / maze_block_width;
-    int col = maze_.GetWidth() - point.x / maze_block_width;
-    maze_.Move(MazePosition{row, col});
+    int col = mazes_[current_maze_index_].GetWidth() - point.x / maze_block_width;
 
-    if (maze_.IsUserAlive()) {
+    // If user won the maze
+    if (mazes_[current_maze_index_].Move(MazePosition{row, col})) {
+        current_maze_index_++;
+    }
+
+    if (mazes_[current_maze_index_].IsUserAlive()) {
         DrawInGameScreen(point, maze_block_width, maze_block_height);
     } else {
         DrawPreGameScreen(point, maze_block_width, maze_block_height);

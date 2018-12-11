@@ -6,8 +6,8 @@
 class ofFingerPaint : public ofBaseApp {
 
 	private:
-		static const int image_x_ = 0;
-		static const int image_y_ = 0;
+		static const int kImageX = 100;
+		static const int kImageY = 0;
 
 	public:
 		void setup();
