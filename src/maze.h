@@ -36,6 +36,7 @@ class Maze {
         int GetItemAt(const MazePosition &position);
         int GetWidth();
         int GetHeight();
+        int GetCurrentMaze();
         MazePosition GetStartPosition();
         int GetFov();
 

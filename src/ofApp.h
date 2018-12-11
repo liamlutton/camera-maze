@@ -6,8 +6,12 @@
 class ofFingerPaint : public ofBaseApp {
 
 	private:
-		static const int kImageX = 100;
+		static const int kImageX = 130;
 		static const int kImageY = 0;
+
+		static const int kMazeTextSpacing = 30;
+		static const int kMazeTextStartX = 10;
+		static const int kMazeTextStartY = 10;
 
 	public:
 		void setup();

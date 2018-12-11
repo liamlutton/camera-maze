@@ -1,6 +1,8 @@
 #include "canvas.h"
 #include <math.h>
 
+const std::string Canvas::kMazeFilePrefix = "maze_";
+
 // Initialize all constant colors
 const ofColor Canvas::kEmptyColor = ofColor(220, 220, 220, 0.8); // Empty space color, green
 const ofColor Canvas::kWallColor = ofColor(50, 50, 50, 1); // Wall color, gray
@@ -24,7 +26,7 @@ void Canvas::Setup() {
 void Canvas::LoadMazes(int maze_index) {
     Maze maze;
     // If maze loads
-    if (maze.Load("maze_" + std::to_string(maze_index))) {
+    if (maze.Load(kMazeFilePrefix + std::to_string(maze_index))) {
         mazes_.push_back(maze);
         LoadMazes(maze_index + 1);
     }
@@ -157,4 +159,12 @@ void Canvas::SetPixelColor(int x, int y, const ofColor &color) {
 
 void Canvas::Display(ofxCvColorImage &image) {
     image.setFromPixels(image_pixels_);
+}
+
+std::vector<Maze> Canvas::GetMazes() {
+    return mazes_;
+}
+
+int Canvas::GetCurrentMazeIndex() {
+    return current_maze_index_;
 }

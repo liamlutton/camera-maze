@@ -1,5 +1,6 @@
 #include "ofApp.h"
 
+
 //--------------------------------------------------------------
 void ofFingerPaint::setup(){
     pen_viewer_.Setup();
@@ -20,8 +21,20 @@ void ofFingerPaint::draw(){
     ofxCvColorImage image = pen_viewer_.GetDisplayImage();
     image.draw(kImageX + image.getWidth(), kImageY, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
 
-    ofDrawBitmapString("Maps:", 10, 10);
+    ofDrawBitmapString("Maps:", kMazeTextStartX, kMazeTextStartY);
     
+    // Write in maps, completed ones colored special
+    Canvas canvas = pen_viewer_.GetCanvas();
+    int current_maze = canvas.GetCurrentMazeIndex();
+    for (int i = 1; i <= canvas.GetMazes().size(); i++) {
+        std::string text = std::to_string(i);
+        if (i < current_maze + 1) {
+            ofSetColor(ofColor(0, 0, 255)); // Sets to blue
+            text.append(" (COMPLETE)");
+        }
+        ofDrawBitmapString(text, kMazeTextStartX, kMazeTextStartY + kMazeTextSpacing * i);
+        ofSetColor(ofColor(255, 255, 255)); // Resets color
+    }
 }
 
 //--------------------------------------------------------------
