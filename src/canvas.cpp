@@ -22,11 +22,9 @@ void Canvas::Setup() {
 }
 
 void Canvas::LoadMazes(int maze_index) {
-    std::cout << maze_index << std::endl;
     Maze maze;
     // If maze loads
     if (maze.Load("maze_" + std::to_string(maze_index))) {
-        std::cout << maze_index << std::endl;
         mazes_.push_back(maze);
         LoadMazes(maze_index + 1);
     }
@@ -101,7 +99,7 @@ void Canvas::DrawInGameScreen(const ofPoint &point, int maze_block_width, int ma
                 SetPixelColor(pos_x, pos_y, kFruitColor);
                 continue;
             case MazePiece::kMazeEnd:
-                SetPixelColor(pos_x, pos_y, kMazeEnd);
+                SetPixelColor(pos_x, pos_y, kEndColor);
                 continue;
         }
 
