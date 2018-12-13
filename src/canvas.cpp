@@ -1,7 +1,11 @@
 #include "canvas.h"
 #include <math.h>
 
-const std::string Canvas::kMazeFilePrefix = "maze_";
+const std::string Canvas::kMazeFilePrefix = "mazes/maze_";
+
+const std::string Canvas::kMusicFruitFile = "music/music_fruit.mp3";
+const std::string Canvas::kMusicVictoryFile = "music/music_victory.mp3";
+const std::string Canvas::kMusicBackgroundFile = "music/music_background.mp3";
 
 // Initialize all constant colors
 const ofColor Canvas::kEmptyColor = ofColor(220, 220, 220, 0.8); // Empty space color, green
@@ -13,6 +17,12 @@ const ofColor Canvas::kPlayerColor = ofColor(0, 100, 255, 1); // Player color, c
 const ofColor Canvas::kTileColor = ofColor(120, 0, 25, 0.5); // Tiling color, brown
 
 void Canvas::Setup() {
+    // Setting up music players
+    fruit_eat_player_.load(kMusicFruitFile);
+    victory_noise_player_.load(kMusicVictoryFile);
+    background_music_player_.load(kMusicBackgroundFile);
+    background_music_player_.play();
+
     LoadMazes(0);
     image_pixels_.allocate(kCameraWidth, kCameraHeight, OF_IMAGE_COLOR);
     background_color_.set(0, 0, 0, 1);
@@ -140,11 +150,16 @@ void Canvas::UpdatePosition(const ofPoint &point) {
     int row = point.y / maze_block_width;
     int col = mazes_[current_maze_index_].GetWidth() - point.x / maze_block_width;
 
-    // If user won the maze
-    if (mazes_[current_maze_index_].Move(MazePosition{row, col})) {
+    // Play sounds (and increment map if won)
+    MazePiece moved_to_piece = mazes_[current_maze_index_].Move(MazePosition{row, col});
+    if (moved_to_piece == kMazeEnd) {
         current_maze_index_++;
+        victory_noise_player_.play();
+    } else if (moved_to_piece == kMazeFruit) {
+        fruit_eat_player_.play();
     }
 
+    // Draw screen for game based on whether user is alive
     if (mazes_[current_maze_index_].IsUserAlive()) {
         DrawInGameScreen(point, maze_block_width, maze_block_height);
     } else {

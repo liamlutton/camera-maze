@@ -48,8 +48,8 @@ bool Maze::Load(std::string maze_name) {
     return true;
 }
 
-// Returns true if user won the maze
-bool Maze::Move(const MazePosition &position) {
+// Returns place moved to
+MazePiece Maze::Move(const MazePosition &position) {
     fov_ -= kFovLossValue;
     if (fov_ < kMinFov) {
         fov_ = kMinFov;
@@ -61,14 +61,14 @@ bool Maze::Move(const MazePosition &position) {
         if (position.row == maze_start_pos_.row && position.column == maze_start_pos_.column) {
             user_alive_ = true;
         }
-        return false;
+        return kMazeEmpty;
     }
 
     // Make sure user is not teleporting
     if (last_position_.row != -1 && last_position_.column != -1) {
         if (fabs(position.row - last_position_.row) > 1 || fabs(position.column - last_position_.column) > 1) {
             KillUser();
-            return false;
+            return kMazeEmpty;
         }
     }
 
@@ -77,15 +77,15 @@ bool Maze::Move(const MazePosition &position) {
     switch (current_piece) {
         case kMazeWall:
             KillUser();
-            break;
+            return kMazeWall;
         case kMazeFruit:
             fov_ = kDefaultFov;
             maze_board_[position.row][position.column] = kMazeEmpty;
-            break;
+            return kMazeFruit;
         case kMazeEnd:
-            return true;
+            return kMazeEnd;
     }
-    return false;
+    return kMazeEmpty;
 }
 
 void Maze::KillUser() {

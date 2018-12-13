@@ -30,7 +30,7 @@ class Maze {
 
     public:
         bool Load(std::string maze_name);
-        bool Move(const MazePosition &position);
+        MazePiece Move(const MazePosition &position);
 
         bool IsUserAlive();
         int GetItemAt(const MazePosition &position);

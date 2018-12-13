@@ -4,6 +4,7 @@
 //--------------------------------------------------------------
 void ofFingerPaint::setup(){
     pen_viewer_.Setup();
+    ofSetBackgroundColor(ofColor(40, 40, 40));
 }
 
 //--------------------------------------------------------------
@@ -29,7 +30,7 @@ void ofFingerPaint::draw(){
     for (int i = 1; i <= canvas.GetMazes().size(); i++) {
         std::string text = std::to_string(i);
         if (i < current_maze + 1) {
-            ofSetColor(ofColor(0, 0, 255)); // Sets to blue
+            ofSetColor(ofColor(255, 255, 0)); // Sets to yellow
             text.append(" (COMPLETE)");
         }
         ofDrawBitmapString(text, kMazeTextStartX, kMazeTextStartY + kMazeTextSpacing * i);

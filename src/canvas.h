@@ -25,7 +25,16 @@ class Canvas {
         std::vector<ofPoint> fov_rel_points_;
         ofPoint pen_position_;
 
+        // Sound players
+        ofSoundPlayer fruit_eat_player_;
+        ofSoundPlayer victory_noise_player_;
+        ofSoundPlayer background_music_player_;
+
         static const std::string kMazeFilePrefix;
+
+        static const std::string kMusicBackgroundFile;
+        static const std::string kMusicFruitFile;
+        static const std::string kMusicVictoryFile;
 
         static const ofColor kEmptyColor;
         static const ofColor kWallColor;
