@@ -51,5 +51,6 @@
 <li>Added teleportation glitch patch</li>
 <li>Added text to display completion</li>
 <li>Added music to game</li>
+<li>Added gameover screen</li>
 </ul> 
 </p>
