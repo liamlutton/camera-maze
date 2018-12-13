@@ -32,12 +32,24 @@
 <li>Changed path of project toward travelling through a maze</li>
 <li>Added home screen for maze startup</li>
 <li>Cleaned up code, brought out constants</li>
+<li>Fixed screen flipping in maze</li>
+<li>Altered code to user {row, column} structure</li>
+<li>Mazes now can be loaded from text files</li>
+<li>Updated code to follow Google styleguides</li>
+<li>Saved fruit for after death to allow respawning of fruits</li>
 </ul> 
 </p>
 
 <h4>Week of Dec 10, 2018</h4>
 <p>
 <ul>
-<li>...</li>
+<li>Added support for constantly decreasing FOV</li>
+<li>Put threshold in place for minimum FOV</li>
+<li>Added support for progressing through mazes</li>
+<li>Fixed color of maze victory block</li>
+<li>Fruit regeneration patched</li>
+<li>Added teleportation glitch patch</li>
+<li>Added text to display completion</li>
+<li>Added music to game</li>
 </ul> 
 </p>
