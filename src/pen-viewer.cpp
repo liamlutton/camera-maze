@@ -37,7 +37,16 @@ bool PenViewer::IsPixelRed(int r, int g, int b) {
     return r > g + b + kColorVibrancyConstant;
 }
 
+bool PenViewer::IsGameOver() {
+    // If all mazes are complete, return true
+    return canvas_.GetMazes().size() == canvas_.GetCurrentMazeIndex();
+}
+
 void PenViewer::Update() {
+    if (IsGameOver()) {
+        return;
+    }
+
     camera_.update();
 
     if (camera_.isFrameNew()) {

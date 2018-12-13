@@ -33,6 +33,7 @@ class PenViewer {
         ofxCvColorImage GetDisplayImage() const;
         Canvas GetCanvas() const;
         bool IsImageLoaded();
+        bool IsGameOver();
 
         void Update();
         void Setup();

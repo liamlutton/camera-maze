@@ -19,12 +19,19 @@ void ofFingerPaint::draw(){
         return;
     }
 
+    // If game is over, just display gameover string
+    if (pen_viewer_.IsGameOver()) {
+        ofDrawBitmapString("Congrats! You beat every maze available!", Canvas::kCameraWidth/2 - kMazeTextSpacing, Canvas::kCameraHeight/2);
+        return;
+    }
+
+    // Draw maze screen
     ofxCvColorImage image = pen_viewer_.GetDisplayImage();
     image.draw(kImageX + image.getWidth(), kImageY, -1 * Canvas::kCameraWidth, Canvas::kCameraHeight);
 
+    // Draw IDs of all maps, completed ones specially colored
     ofDrawBitmapString("Maps:", kMazeTextStartX, kMazeTextStartY);
     
-    // Write in maps, completed ones colored special
     Canvas canvas = pen_viewer_.GetCanvas();
     int current_maze = canvas.GetCurrentMazeIndex();
     for (int i = 1; i <= canvas.GetMazes().size(); i++) {
